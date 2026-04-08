@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="style.css"></link> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="background-colour">
+    <div class="Container headbig">
+        <h1 class=""> Markol's boredom </h1>
+    </div>
+    <div class="buttondesign ButtonAlighn Container">
+        <button data-group=".page" data-target="page-1">1</button>
+        <button data-group=".page" data-target="page-2">2</button>
+        <button data-group=".page" data-target="page-3">3</button>
+        <button data-group=".page" data-target="page-4">4</button>
+    </div>
+
+    <div id="page-1" class="page show Main-text">
+        <h1 class="headbig">Факт о котах!</h1>
+        <p id="APIOutput" class="APIOutput"> </p>
+    </div>
+    
+    <div id="page-2" class="page Main-text">
+        <h1 class="headbig">Обо мне</h1>
+        <p class="TextSmall TextSmallAlign"> Experience Some work in frontend development (1 website done, got kicked out after) Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis malesuada urna in ornare. Donec egestas sapien commodo turpis sodales scelerisque. Vivamus lobortis facilisis vehicula. Mauris faucibus leo ligula, ut dictum dui aliquam non. Sed vel ex dictum, accumsan nunc in, congue leo. Sed varius quis purus sed euismod. Proin eu dui lorem. Phasellus auctor nunc non lacus elementum ultrices. Maecenas tellus risus, malesuada in dolor et, vestibulum interdum est. Morbi tellus lectus, pretium ac sodales in, rhoncus in leo. Proin lobortis orci lorem, tristique elementum elit feugiat non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis fringilla velit. Curabitur sit amet sem malesuada, fringilla enim sit amet, ultricies tellus. Sed condimentum eu ex nec hendrerit.</p>
+    </div>
+
+    <div id="page-3" class="page Main-text Container">
+        <div class="KorobkaAlighn">
+         <h1 class="headbig">Любимое животное</h1>
+         <div class="Korobka KorobkaRow">
+            <div>
+                
+            </div>
+         </div>
+        </div>
+    </div>
+
+    <div id="page-4" class="page Main-text">
+        <h1 class="headbig">Цели</h1>
+    </div>
+    <div class="Container">
+        <img src="./Images/Sweepie.png" alt="Huina">
+    </div>
+
+    <script>
+        document.querySelectorAll('button[data-group]').forEach(e=>{
+            e.onclick = event =>{
+                document.querySelectorAll(e.dataset.group).forEach(function(elem){
+                    elem.classList.toggle('show',elem.id === event.currentTarget.dataset.target)
+                })
+            }
+        })
+
+    fetchUserData();
+    function fetchUserData() {
+            fetch('https://meowfacts.herokuapp.com/')
+                .then(response => { return response.json() })
+                .then(json => {
+                    const CatFact = document.getElementById('APIOutput')
+                    CatFact.innerText = json.data.join("\n");
+                });
+    }
+
+    </script>
+</body>
